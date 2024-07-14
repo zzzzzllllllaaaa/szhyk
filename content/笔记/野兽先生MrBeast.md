@@ -10,5 +10,12 @@ dg-publish: true
 
 还是那么大手笔，只能说卧槽牛逼！
 
+  
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">  
+<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=1506165592&bvid=BV18S421R7bU&cid=1614499381&p=1&autoplay=0&quality=3"  
+style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"  
+scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">  
+</iframe>  
+</div>
 
 我看的时候有9千人在看，相当夸张。
