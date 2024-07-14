@@ -10,8 +10,5 @@ dg-publish: true
 
 还是那么大手笔，只能说卧槽牛逼！
 
-<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=1506165592&bvid=BV18S421R7bU&cid=1614499381&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-
-
 
 我看的时候有9千人在看，相当夸张。
