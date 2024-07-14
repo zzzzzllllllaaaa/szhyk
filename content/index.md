@@ -1,15 +1,7 @@
 ---
 title: Text
 ---
-##### [[说明]] 
-- [[Python]] 
-- [[逻辑学基础]] 
-- [[语文]] 
-- [[数学]] 
-- [[英语]] 
-- [[形式科学]] 
-- [[自然科学]] 
-- [[人文社科]] 
+测试
 
 <script src="https://giscus.app/client.js"
         data-repo="insile/my-notes"
