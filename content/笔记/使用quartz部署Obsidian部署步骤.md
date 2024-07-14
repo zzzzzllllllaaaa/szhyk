@@ -125,7 +125,7 @@ jobs:
 npx quartz sync
 ````
 
-每次更改后记得更新推送到远程仓库上`
+每次更改后记得更新推送到远程仓库上，有的时候推不上去可以用[sublimemerge.com](https://www.sublimemerge.com/)，或许会好一点。
 
 ##### 步骤 5. 更多个性化设置
 
