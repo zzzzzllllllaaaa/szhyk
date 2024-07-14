@@ -1,0 +1,17 @@
+---
+dg-publish: true
+---
+[[博主]]，[[youtube油桶]]，[[随记]]
+
+[【MrBeast官方账号的个人空间-哔哩哔哩】]( https://b23.tv/PZChS96)
+[野兽先生的油桶主页](https://m.youtube.com/@MrBeast/featured)，2024-07-13看是3.01亿订阅，亿啊啊啊啊啊，实在是，实在是卧槽！
+
+他的每一个视频成本都特别高！第一下在b站看到他的视频我都惊了，这样挑战下居然能赢这么多钱，再多看几个视频，每一个视频都让我感到不可思议，因为每一个视频可以看见的制作场景宏大，光奖金池的话费就不是小数目。有一瞬间让我想到了一个街头成人综艺“金钱万能”，但是野兽先生让我觉得更加不可思议，他的节目不是为了满足自己的欲望而是满足别人的欲望，他的钱花的那么容易…………
+
+还是那么大手笔，只能说卧槽牛逼！
+
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=1506165592&bvid=BV18S421R7bU&cid=1614499381&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+
+
+
+我看的时候有9千人在看，相当夸张。
