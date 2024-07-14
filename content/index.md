@@ -1,23 +1,9 @@
 ---
-title: Text
+title: 主页面
 ---
-测试
 
-<script src="https://giscus.app/client.js"
-        data-repo="insile/my-notes"
-        data-repo-id="R_kgDOLZLpBQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOLZLpBc4CeMax"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-</script>
+让我想想这个网站可以做些什么呢？嘎嘎嘎，想不到就先这样放着。
+
 
 
 
