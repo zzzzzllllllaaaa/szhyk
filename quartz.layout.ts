@@ -7,7 +7,7 @@ export const sharedPageComponents: SharedLayout = {
   header: [],
   footer: Component.Footer({
     links: {
-      "自我挣扎的精神病人": "https://space.bilibili.com/1722199130"
+      "zhzhzh": "https://zhzhzh.netlify.app/"
     },
   }),
 }
