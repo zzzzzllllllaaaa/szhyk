@@ -26,7 +26,7 @@ from #
 sort file.mtime desc
 ```
 
-![[dataview目录语法]]
+
 **元数据:**
 - file.name:文件标题。
 - file.folder:该文件所属文件夹的路径。
