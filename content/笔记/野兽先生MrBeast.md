@@ -1,7 +1,7 @@
 ---
 dg-publish: true
 ---
-[[博主]]，[[youtube油桶]]，[[随记]]
+[[博主]]，[[随记]]，[[有意思]]
 
 [【MrBeast官方账号的个人空间-哔哩哔哩】]( https://b23.tv/PZChS96)
 [野兽先生的油桶主页](https://m.youtube.com/@MrBeast/featured)，2024-07-13看是3.01亿订阅，亿啊啊啊啊啊，实在是，实在是卧槽！
