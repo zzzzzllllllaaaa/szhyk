@@ -13,7 +13,7 @@ title: 主页面
 
 ```dataview
 table file.mtime AS 修改时间
-from "3zh2/笔记"
+from ""
 sort file.ctime desc
 limit 10
 ```
