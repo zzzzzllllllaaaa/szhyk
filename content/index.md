@@ -1,6 +1,9 @@
 ---
 title: 主页面
 ---
+
+<meta name="msvalidate.01" content="B16A2268E46BE7CBE27E3CF4A86C007A" />
+
 [3zh2](http://a.zhzhzh.cloudns.ch/)是一个基于quartz+github搭建的数字花园，真不错。
 
 [哔哩哔哩 嵌入代码转换器 (zhzhzh.cloudns.ch)](https://a.zhzhzh.cloudns.ch/b%E7%AB%99%E5%B5%8C%E5%85%A5%E4%BB%A3%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%99%A8.html)，这是我发现b站嵌入代码不能直接用弄的，可以转换为禁止自动播放、超清播放和自适应页面大小的嵌入代码。
