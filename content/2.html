@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>顾客ID与箱号查询</title>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input { margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+<h1>顾客ID与箱号查询</h1>
+<input type="text" id="customerId" placeholder="输入顾客ID后四位" />
+<button onclick="findBoxNumber()">查询箱号</button>
+<br>
+<h3 id="result"></h3>
+
+<script>
+    let data = {};
+
+    // 假设'查询表.xlsx'在同一目录下
+    function readExcelFile() {
+        fetch('查询表.xlsx')
+            .then(res => res.arrayBuffer())
+            .then(ab => {
+                const workbook = XLSX.read(ab, { type: 'array' });
+                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                const json = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+                json.forEach(row => {
+                    const customerId = row[0].toString();
+                    const boxNumber = row[1];
+                    if (customerId && boxNumber) {
+                        data[customerId.slice(-4)] = boxNumber;
+                    }
+                });
+            })
+            .catch(error => console.error('Error reading the Excel file:', error));
+    }
+
+    function findBoxNumber() {
+        const inputId = document.getElementById('customerId').value;
+        const boxNumber = data[inputId];
+        document.getElementById('result').innerText = boxNumber ? `箱号: ${boxNumber}` : '未找到对应的箱号';
+    }
+
+    // 读取Excel文件
+    readExcelFile();
+</script>
+
+</body>
+</html>
+
