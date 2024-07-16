@@ -7,6 +7,8 @@
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
         input { margin: 10px 0; }
+        .history { margin-top: 20px; }
+        .history-item { margin-bottom: 5px; }
     </style>
 </head>
 <body>
@@ -16,9 +18,14 @@
 <button onclick="findBoxNumber()">查询箱号</button>
 <br>
 <h3 id="result"></h3>
+<div class="history">
+    <h3>最近查询</h3>
+    <div id="historyList"></div>
+</div>
 
 <script>
     let data = {};
+    let history = [];
 
     // 假设'查询表.xlsx'在同一目录下
     function readExcelFile() {
@@ -42,7 +49,31 @@
     function findBoxNumber() {
         const inputId = document.getElementById('customerId').value;
         const boxNumber = data[inputId];
-        document.getElementById('result').innerText = boxNumber ? `箱号: ${boxNumber}` : '未找到对应的箱号';
+        const result = boxNumber ? `箱号: ${boxNumber}` : '未找到对应的箱号';
+        document.getElementById('result').innerText = result;
+
+        // 清空输入框内容
+        document.getElementById('customerId').value = '';
+
+        // 更新查询历史
+        if (inputId) {
+            if (history.length === 5) {
+                history.shift(); // 删除最旧的一条记录
+            }
+            history.push({ id: inputId, box: result });
+            updateHistoryList();
+        }
+    }
+
+    function updateHistoryList() {
+        const historyList = document.getElementById('historyList');
+        historyList.innerHTML = '';
+        history.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'history-item';
+            div.innerText = `顾客ID: ${item.id}, ${item.box}`;
+            historyList.appendChild(div);
+        });
     }
 
     // 读取Excel文件
@@ -51,4 +82,3 @@
 
 </body>
 </html>
-
