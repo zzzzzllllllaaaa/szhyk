@@ -1,0 +1,105 @@
+[[在表格上检索数据]]
+
+在原来的基础上用网站来查询数据可能要更快一些，我在想如果再加入语音输入输出会不好更快呢？
+### 需求
+- 帮我编写一个html，可以上传exccel，我上传的excel表格只包含两列数据，一列是顾客id，一列是箱号，我需要这个网站提供一个输入顾客id后四尾数输出对应箱号的功能。
+- 修改一下，我会把对应的excel文件命名为查询表.xlsx，然后放在同一文件夹里面，这样直接查询这个文件就可以了，不需要选择文件。
+- 我觉得重复删除输入很烦，可以改成输出箱号后清空框内的内容，保留5条最近查询过的数据
+
+### 使用说明
+
+1. excel表格只包含两列数据，一列是顾客id，一列是箱号。
+2. 将“查询表.xlsx”文件放在与HTML页面相同的文件夹中。
+3. 该页面会在加载时尝试读取文件夹中的“查询表.xlsx”文件。
+4. 在输入框中输入顾客 ID 的后四位数字，然后点击“查询箱号”按钮。输入框内容会被清空。
+5. 页面下方将显示最近的5条查询历史记录。
+
+### HTML和JavaScript代码
+
+```html
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>顾客ID与箱号查询</title>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input { margin: 10px 0; }
+        .history { margin-top: 20px; }
+        .history-item { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+<h1>顾客ID与箱号查询</h1>
+<input type="text" id="customerId" placeholder="输入顾客ID后四位" />
+<button onclick="findBoxNumber()">查询箱号</button>
+<br>
+<h3 id="result"></h3>
+<div class="history">
+    <h3>最近查询</h3>
+    <div id="historyList"></div>
+</div>
+
+<script>
+    let data = {};
+    let history = [];
+
+    // 假设'查询表.xlsx'在同一目录下
+    function readExcelFile() {
+        fetch('查询表.xlsx')
+            .then(res => res.arrayBuffer())
+            .then(ab => {
+                const workbook = XLSX.read(ab, { type: 'array' });
+                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                const json = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+                json.forEach(row => {
+                    const customerId = row[0].toString();
+                    const boxNumber = row[1];
+                    if (customerId && boxNumber) {
+                        data[customerId.slice(-4)] = boxNumber;
+                    }
+                });
+            })
+            .catch(error => console.error('Error reading the Excel file:', error));
+    }
+
+    function findBoxNumber() {
+        const inputId = document.getElementById('customerId').value;
+        const boxNumber = data[inputId];
+        const result = boxNumber ? `箱号: ${boxNumber}` : '未找到对应的箱号';
+        document.getElementById('result').innerText = result;
+
+        // 清空输入框内容
+        document.getElementById('customerId').value = '';
+
+        // 更新查询历史
+        if (inputId) {
+            if (history.length === 5) {
+                history.shift(); // 删除最旧的一条记录
+            }
+            history.push({ id: inputId, box: result });
+            updateHistoryList();
+        }
+    }
+
+    function updateHistoryList() {
+        const historyList = document.getElementById('historyList');
+        historyList.innerHTML = '';
+        history.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'history-item';
+            div.innerText = `顾客ID: ${item.id}, ${item.box}`;
+            historyList.appendChild(div);
+        });
+    }
+
+    // 读取Excel文件
+    readExcelFile();
+</script>
+
+</body>
+</html>
+```
+
