@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字配比生成器</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+            text-align: center;
+        }
+        th, td {
+            padding: 8px;
+        }
+        input[type="number"] {
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <h2>数字配比生成器</h2>
+    <label for="total">输入配比总数:</label>
+    <input type="number" id="total" name="total">
+    <button onclick="addColumn()">添加列</button>
+    <button onclick="generateTable()">生成表格</button>
+
+    <table id="inputTable">
+        <thead>
+            <tr id="inputHeader">
+                <th>输入数字</th>
+            </tr>
+        </thead>
+        <tbody id="inputBody">
+            <tr>
+                <td><input type="number" class="originalValue"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>配比结果</h3>
+    <table id="resultTable">
+        <thead>
+            <tr id="resultHeader">
+                <th>原始值</th>
+                <th>配比结果</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function addColumn() {
+            const inputBody = document.getElementById('inputBody');
+            const inputHeader = document.getElementById('inputHeader');
+            
+            // Add a new header column for the new input
+            let newHeaderCell = document.createElement('th');
+            newHeaderCell.textContent = `输入数字 ${inputHeader.cells.length}`;
+            inputHeader.appendChild(newHeaderCell);
+            
+            // Add a new input cell for each row
+            for (let i = 0; i < inputBody.rows.length; i++) {
+                let newCell = document.createElement('td');
+                newCell.innerHTML = '<input type="number" class="originalValue">';
+                inputBody.rows[i].appendChild(newCell);
+            }
+        }
+
+        function generateTable() {
+            const total = parseInt(document.getElementById('total').value);
+            const originalValues = Array.from(document.querySelectorAll('.originalValue')).map(input => parseInt(input.value));
+            const tbody = document.getElementById('resultTable').getElementsByTagName('tbody')[0];
+            tbody.innerHTML = ''; // 清空之前的结果
+
+            if (isNaN(total) || total <= 0) {
+                alert("请输入有效的配比总数");
+                return;
+            }
+
+            let inputValues = [];
+            // 组织输入值为二维数组
+            for (let i = 0; i < originalValues.length; i++) {
+                if (isNaN(originalValues[i])) continue;
+                if (!inputValues[Math.floor(i / inputHeader.cells.length)]) {
+                    inputValues[Math.floor(i / inputHeader.cells.length)] = [];
+                }
+                inputValues[Math.floor(i / inputHeader.cells.length)].push(originalValues[i]);
+            }
+
+            inputValues.forEach((rowValues, rowIndex) => {
+                rowValues.forEach((value, colIndex) => {
+                    if (!isNaN(value) && value > 0) {
+                        let row = tbody.rows[rowIndex] || document.createElement('tr');
+                        tbody.appendChild(row);
+                        
+                        let originalCell = row.cells[colIndex * 2] || document.createElement('td');
+                        originalCell.textContent = value;
+                        row.appendChild(originalCell);
+
+                        let resultCell = row.cells[colIndex * 2 + 1] || document.createElement('td');
+                        let result = getRatioResults(value, total);
+                        resultCell.textContent = result.join(', ');
+                        row.appendChild(resultCell);
+                    }
+                });
+            });
+        }
+
+        function getRatioResults(value, total) {
+            let results = [];
+            while (value >= total) {
+                results.push(total);
+                value -= total;
+            }
+            if (value > 0) results.push(value);
+            return results;
+        }
+    </script>
+</body>
+</html>
