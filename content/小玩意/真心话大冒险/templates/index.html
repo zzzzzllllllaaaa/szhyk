@@ -2,56 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>真心话大冒险</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div id="game">
-        <h1>真心话大冒险</h1>
-        <div id="cards">
-            <!-- 生成卡片 -->
-            <script>
-                for (let i = 1; i <= 24; i++) {
-                    document.write('<div class="card" id="card-' + i + '">' + i + '</div>');
-                }
-            </script>
-        </div>
-        <button onclick="drawCard()">抽取卡片</button>
-        <button onclick="resetGame()">重置游戏</button>
-        <p id="message"></p>
-    </div>
-
-    <script>
-        async function drawCard() {
-            const response = await fetch('/draw_card', { method: 'POST' });
-            const result = await response.json();
-
-            if (response.status === 200) {
-                const cardElement = document.getElementById('card-' + result.card_number);
-                if (cardElement) {
-                    cardElement.classList.add('hidden');
-                }
-                document.getElementById('message').innerText = result.type === 'truth' ? '真心话: ' : '大冒险: ' + result.content;
-            } else {
-                document.getElementById('message').innerText = result.message;
-            }
-        }
-
-        async function resetGame() {
-            const response = await fetch('/reset_game', { method: 'POST' });
-            const result = await response.json();
-            
-            if (response.status === 200) {
-                document.querySelectorAll('.card').forEach(card => card.classList.remove('hidden'));
-                document.getElementById('message').innerText = result.message;
-            }
-        }
-    </script>
-        <h1>抽取卡片</h1>
-        {% if card %}
-            <p>你抽到的卡片是: {{ card }}</p>
-        {% endif %}
-        <a href="/draw_card">抽取卡片</a>
+    <h1>真心话大冒险</h1>
+    {% if card %}
+        <p>你抽到的卡片是: {{ card }}</p>
+    {% endif %}
+    <a href="/draw_card">抽取卡片</a>
 </body>
 </html>
