@@ -109,10 +109,17 @@ ${comment.text}
             `).join('\n\n');
 
             const blob = new Blob([commentTexts], { type: 'text/plain' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'comments.txt';
-            link.click();
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                // For IE browser
+                window.navigator.msSaveOrOpenBlob(blob, 'comments.txt');
+            } else {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'comments.txt';
+                document.body.appendChild(link); // Append link to the body for Firefox
+                link.click();
+                document.body.removeChild(link); // Remove link after download
+            }
         }
 
         function exportToExcel() {
@@ -124,10 +131,17 @@ ${comment.text}
 
             const csvContent = [headers, ...rows].map(e => e.join(",")).join("\n");
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'comments.csv';
-            link.click();
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                // For IE browser
+                window.navigator.msSaveOrOpenBlob(blob, 'comments.csv');
+            } else {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'comments.csv';
+                document.body.appendChild(link); // Append link to the body for Firefox
+                link.click();
+                document.body.removeChild(link); // Remove link after download
+            }
         }
     </script>
 </body>
