@@ -2,7 +2,7 @@
 
 抖音视频链接可以分享视频链接在浏览器打开，最前面的那一长串数字就是视频id。
 
-[视频评论查询 (zhzhzh.cloudns.ch)](http://a.zhzhzh.cloudns.ch/%E5%B0%8F%E7%8E%A9%E6%84%8F/%E7%88%AC%E5%8F%96%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E8%AF%84%E8%AE%BA.html)
+[视频评论查询 (zhzhzh.cloudns.ch)](http://a.zhzhzh.cloudns.ch/%E5%B0%8F%E7%8E%A9%E6%84%8F/%E7%88%AC%E5%8F%96%E6%8A%96%E9%9F%B3%E8%A7%86%E9%A2%91%E8%AF%84%E8%AE%BA.html)，ps:手机端好像导出不了，算了，管它呢，就这样吧！
 ## 简化（最终版本）
 - 只保留评论内容和获赞数
 - 评论内容只保留具体内容，去除掉“评论内容”这个前缀
