@@ -5,6 +5,7 @@
 - 帮我编写一个html，可以上传exccel，我上传的excel表格只包含两列数据，一列是顾客id，一列是箱号，我需要这个网站提供一个输入顾客id后四尾数输出对应箱号的功能。
 - 修改一下，我会把对应的excel文件命名为查询表.xlsx，然后放在同一文件夹里面，这样直接查询这个文件就可以了，不需要选择文件。
 - 我觉得重复删除输入很烦，可以改成输出箱号后清空框内的内容，保留5条最近查询过的数据
+- 增加了回车键直接输入功能
 
 ### 使用说明
 
@@ -13,6 +14,9 @@
 3. 该页面会在加载时尝试读取文件夹中的“查询表.xlsx”文件。
 4. 在输入框中输入顾客 ID 的后四位数字，然后点击“查询箱号”按钮。输入框内容会被清空。
 5. 页面下方将显示最近的5条查询历史记录。
+6. **回车键查询功能**：
+    - 在输入框上添加了一个事件监听器，监听 `keypress` 事件。
+    - 当用户按下回车键 (`event.key === 'Enter'`) 时，调用 `findBoxNumber` 函数进行查询。
 
 ### HTML和JavaScript代码
 
@@ -97,9 +101,18 @@
 
     // 读取Excel文件
     readExcelFile();
+
+    // 添加回车键查询功能
+    document.getElementById('customerId').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            findBoxNumber();
+        }
+    });
 </script>
 
 </body>
 </html>
 ```
+
+
 
