@@ -9,11 +9,6 @@
         input { margin: 10px 0; }
         .history { margin-top: 20px; }
         .history-item { margin-bottom: 5px; }
-        #microphone {
-            display: inline-block;
-            cursor: pointer;
-            margin-left: 10px;
-        }
     </style>
 </head>
 <body>
@@ -21,7 +16,6 @@
 <h1>顾客ID与箱号查询</h1>
 <input type="text" id="customerId" placeholder="输入顾客ID后四位" />
 <button onclick="findBoxNumber()">查询箱号</button>
-<img id="microphone" src="https://img.icons8.com/ios-filled/50/000000/microphone.png" alt="Microphone" width="30" height="30" />
 <br>
 <h3 id="result"></h3>
 <div class="history">
@@ -85,33 +79,12 @@
     // 读取Excel文件
     readExcelFile();
 
-    // 语音输入功能
-    const microphone = document.getElementById('microphone');
-    const customerIdInput = document.getElementById('customerId');
-
-    if ('webkitSpeechRecognition' in window) {
-        const recognition = new webkitSpeechRecognition();
-        recognition.lang = 'zh-CN';
-        recognition.continuous = false;
-        recognition.interimResults = false;
-
-        recognition.onresult = function(event) {
-            const transcript = event.results[0][0].transcript;
-            customerIdInput.value = transcript.replace(/\s+/g, ''); // 去除空格
+    // 添加回车键查询功能
+    document.getElementById('customerId').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
             findBoxNumber();
-        };
-
-        recognition.onerror = function(event) {
-            console.error('Speech recognition error:', event.error);
-        };
-
-        microphone.addEventListener('click', () => {
-            recognition.start();
-        });
-    } else {
-        console.warn('Web Speech API is not supported in this browser.');
-        microphone.style.display = 'none';
-    }
+        }
+    });
 </script>
 
 </body>
