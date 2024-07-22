@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>顾客ID与箱号查询</title>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input { margin: 10px 0; }
+        .history { margin-top: 20px; }
+        .history-item { margin-bottom: 5px; }
+        #microphone {
+            display: inline-block;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>顾客ID与箱号查询</h1>
+<input type="text" id="customerId" placeholder="输入顾客ID后四位" />
+<button onclick="findBoxNumber()">查询箱号</button>
+<img id="microphone" src="https://img.icons8.com/ios-filled/50/000000/microphone.png" alt="Microphone" width="30" height="30" />
+<br>
+<h3 id="result"></h3>
+<div class="history">
+    <h3>最近查询</h3>
+    <div id="historyList"></div>
+</div>
+
+<script>
+    let data = {};
+    let history = [];
+
+    // 假设'查询表.xlsx'在同一目录下
+    function readExcelFile() {
+        fetch('查询表.xlsx')
+            .then(res => res.arrayBuffer())
+            .then(ab => {
+                const workbook = XLSX.read(ab, { type: 'array' });
+                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                const json = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+                json.forEach(row => {
+                    const customerId = row[0].toString();
+                    const boxNumber = row[1];
+                    if (customerId && boxNumber) {
+                        data[customerId.slice(-4)] = boxNumber;
+                    }
+                });
+            })
+            .catch(error => console.error('Error reading the Excel file:', error));
+    }
+
+    function findBoxNumber() {
+        const inputId = document.getElementById('customerId').value;
+        const boxNumber = data[inputId];
+        const result = boxNumber ? `箱号: ${boxNumber}` : '未找到对应的箱号';
+        document.getElementById('result').innerText = result;
+
+        // 清空输入框内容
+        document.getElementById('customerId').value = '';
+
+        // 更新查询历史
+        if (inputId) {
+            if (history.length === 5) {
+                history.shift(); // 删除最旧的一条记录
+            }
+            history.push({ id: inputId, box: result });
+            updateHistoryList();
+        }
+    }
+
+    function updateHistoryList() {
+        const historyList = document.getElementById('historyList');
+        historyList.innerHTML = '';
+        history.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'history-item';
+            div.innerText = `顾客ID: ${item.id}, ${item.box}`;
+            historyList.appendChild(div);
+        });
+    }
+
+    // 读取Excel文件
+    readExcelFile();
+
+    // 语音输入功能
+    const microphone = document.getElementById('microphone');
+    const customerIdInput = document.getElementById('customerId');
+
+    if ('webkitSpeechRecognition' in window) {
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = 'zh-CN';
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            customerIdInput.value = transcript.replace(/\s+/g, ''); // 去除空格
+            findBoxNumber();
+        };
+
+        recognition.onerror = function(event) {
+            console.error('Speech recognition error:', event.error);
+        };
+
+        microphone.addEventListener('click', () => {
+            recognition.start();
+        });
+    } else {
+        console.warn('Web Speech API is not supported in this browser.');
+        microphone.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
