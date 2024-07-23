@@ -22,18 +22,6 @@
             margin-bottom: 10px;
             font-size: 18px;
         }
-        #inputContainer {
-            margin-top: 20px;
-        }
-        #inputContainer input {
-            font-size: 18px;
-            padding: 5px;
-            margin-right: 10px;
-        }
-        #inputContainer button {
-            font-size: 18px;
-            padding: 5px 10px;
-        }
     </style>
 </head>
 <body>
@@ -41,11 +29,6 @@
     <select id="columnSelect"></select>
     <button onclick="displayRandomContent()">随机显示</button>
     <div id="result"></div>
-
-    <div id="inputContainer">
-        <input type="text" id="newContentInput" placeholder="输入新内容">
-        <button onclick="addNewContent()">添加内容</button>
-    </div>
 
     <div id="recentContent">
         <h2>最近10条随机内容</h2>
@@ -148,39 +131,6 @@
                 div.innerText = item;
                 recentList.appendChild(div);
             });
-        }
-
-        function addNewContent() {
-            const columnSelect = document.getElementById('columnSelect');
-            const selectedColumn = columnSelect.value;
-            const newContentInput = document.getElementById('newContentInput');
-            const newContent = newContentInput.value.trim();
-
-            if (!newContent) {
-                alert('请输入内容');
-                return;
-            }
-
-            if (!data[selectedColumn]) {
-                data[selectedColumn] = [];
-            }
-
-            data[selectedColumn].push(newContent);
-            newContentInput.value = '';
-
-            // 将新内容存储到本地存储
-            const storedData = localStorage.getItem('data');
-            let localData = {};
-            if (storedData) {
-                localData = JSON.parse(storedData);
-            }
-            if (!localData[selectedColumn]) {
-                localData[selectedColumn] = [];
-            }
-            localData[selectedColumn].push(newContent);
-            localStorage.setItem('data', JSON.stringify(localData));
-
-            alert('内容已添加');
         }
 
         // Load the Excel file when the page loads
