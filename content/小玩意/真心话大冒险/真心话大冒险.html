@@ -99,6 +99,9 @@
                 recentContent.shift(); // 移除最早的一条
             }
             updateRecentList();
+
+            // 从数据集中移除已选择的内容
+            array.splice(randomIndex, 1);
         }
 
         function updateRecentList() {
