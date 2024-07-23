@@ -34,11 +34,6 @@
             font-size: 18px;
             padding: 5px 10px;
         }
-        #statusMessage {
-            margin-top: 10px;
-            font-size: 18px;
-            color: green;
-        }
     </style>
 </head>
 <body>
@@ -49,11 +44,8 @@
 
     <div id="inputContainer">
         <input type="text" id="newContentInput" placeholder="输入新内容">
-        <input type="text" id="customColumnInput" placeholder="输入列名">
         <button onclick="addNewContent()">添加内容</button>
     </div>
-
-    <div id="statusMessage"></div>
 
     <div id="recentContent">
         <h2>最近10条随机内容</h2>
@@ -159,26 +151,21 @@
         }
 
         function addNewContent() {
+            const columnSelect = document.getElementById('columnSelect');
+            const selectedColumn = columnSelect.value;
             const newContentInput = document.getElementById('newContentInput');
-            const customColumnInput = document.getElementById('customColumnInput');
             const newContent = newContentInput.value.trim();
-            const customColumn = customColumnInput.value.trim();
 
-            if (!newContent || !customColumn) {
-                document.getElementById('statusMessage').innerText = '请输入内容和列名';
+            if (!newContent) {
+                alert('请输入内容');
                 return;
             }
 
-            if (!data[customColumn]) {
-                data[customColumn] = [];
-                const columnSelect = document.getElementById('columnSelect');
-                const option = document.createElement('option');
-                option.value = customColumn;
-                option.text = customColumn;
-                columnSelect.appendChild(option);
+            if (!data[selectedColumn]) {
+                data[selectedColumn] = [];
             }
 
-            data[customColumn].push(newContent);
+            data[selectedColumn].push(newContent);
             newContentInput.value = '';
 
             // 将新内容存储到本地存储
@@ -187,13 +174,13 @@
             if (storedData) {
                 localData = JSON.parse(storedData);
             }
-            if (!localData[customColumn]) {
-                localData[customColumn] = [];
+            if (!localData[selectedColumn]) {
+                localData[selectedColumn] = [];
             }
-            localData[customColumn].push(newContent);
+            localData[selectedColumn].push(newContent);
             localStorage.setItem('data', JSON.stringify(localData));
 
-            document.getElementById('statusMessage').innerText = '内容已添加';
+            alert('内容已添加');
         }
 
         // Load the Excel file when the page loads
