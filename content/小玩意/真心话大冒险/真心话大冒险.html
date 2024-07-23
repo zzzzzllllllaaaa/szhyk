@@ -22,6 +22,23 @@
             margin-bottom: 10px;
             font-size: 18px;
         }
+        #inputContainer {
+            margin-top: 20px;
+        }
+        #inputContainer input {
+            font-size: 18px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        #inputContainer button {
+            font-size: 18px;
+            padding: 5px 10px;
+        }
+        #statusMessage {
+            margin-top: 10px;
+            font-size: 18px;
+            color: green;
+        }
     </style>
 </head>
 <body>
@@ -29,6 +46,14 @@
     <select id="columnSelect"></select>
     <button onclick="displayRandomContent()">随机显示</button>
     <div id="result"></div>
+
+    <div id="inputContainer">
+        <input type="text" id="newContentInput" placeholder="输入新内容">
+        <input type="text" id="customColumnInput" placeholder="输入列名">
+        <button onclick="addNewContent()">添加内容</button>
+    </div>
+
+    <div id="statusMessage"></div>
 
     <div id="recentContent">
         <h2>最近10条随机内容</h2>
@@ -73,9 +98,27 @@
                         columnSelect.appendChild(option);
                     }
                 }
+
+                // 加载本地存储的内容
+                loadLocalStorageData();
             } catch (error) {
                 document.getElementById('result').innerText = '加载Excel文件失败';
                 console.error('Error loading Excel file:', error);
+            }
+        }
+
+        function loadLocalStorageData() {
+            const storedData = localStorage.getItem('data');
+            if (storedData) {
+                const localData = JSON.parse(storedData);
+                for (const column in localData) {
+                    if (localData.hasOwnProperty(column)) {
+                        if (!data[column]) {
+                            data[column] = [];
+                        }
+                        data[column] = data[column].concat(localData[column]);
+                    }
+                }
             }
         }
 
@@ -113,6 +156,44 @@
                 div.innerText = item;
                 recentList.appendChild(div);
             });
+        }
+
+        function addNewContent() {
+            const newContentInput = document.getElementById('newContentInput');
+            const customColumnInput = document.getElementById('customColumnInput');
+            const newContent = newContentInput.value.trim();
+            const customColumn = customColumnInput.value.trim();
+
+            if (!newContent || !customColumn) {
+                document.getElementById('statusMessage').innerText = '请输入内容和列名';
+                return;
+            }
+
+            if (!data[customColumn]) {
+                data[customColumn] = [];
+                const columnSelect = document.getElementById('columnSelect');
+                const option = document.createElement('option');
+                option.value = customColumn;
+                option.text = customColumn;
+                columnSelect.appendChild(option);
+            }
+
+            data[customColumn].push(newContent);
+            newContentInput.value = '';
+
+            // 将新内容存储到本地存储
+            const storedData = localStorage.getItem('data');
+            let localData = {};
+            if (storedData) {
+                localData = JSON.parse(storedData);
+            }
+            if (!localData[customColumn]) {
+                localData[customColumn] = [];
+            }
+            localData[customColumn].push(newContent);
+            localStorage.setItem('data', JSON.stringify(localData));
+
+            document.getElementById('statusMessage').innerText = '内容已添加';
         }
 
         // Load the Excel file when the page loads
