@@ -2,14 +2,55 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>顾客ID与箱号查询</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        input { margin: 10px 0; }
-        .history { margin-top: 20px; }
-        .history-item { margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; }
-        .delete-btn { margin-left: 10px; cursor: pointer; color: red; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        input, button {
+            margin: 10px 0;
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .history {
+            margin-top: 20px;
+        }
+        .history-item {
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .delete-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            color: red;
+        }
+        @media (min-width: 600px) {
+            input, button {
+                width: auto;
+                display: inline-block;
+            }
+            button {
+                margin-left: 10px;
+            }
+        }
+        @media (min-width: 800px) {
+            .history-item {
+                justify-content: flex-start;
+            }
+            .delete-btn {
+                margin-left: auto;
+            }
+        }
     </style>
 </head>
 <body>
