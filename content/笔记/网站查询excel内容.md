@@ -8,6 +8,7 @@
 - 增加了回车键直接输入功能
 - 保留10条记录，并增加删除记录按钮。
 - 给记录前面增加序号
+- 自适应页面大小
 
 
 ### 使用说明
@@ -21,20 +22,63 @@
     - 在输入框上添加了一个事件监听器，监听 `keypress` 事件。
     - 当用户按下回车键 (`event.key === 'Enter'`) 时，调用 `findBoxNumber` 函数进行查询。
 
-### HTML和JavaScript代码
+
+### 代码
 
 ```html
 <!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>顾客ID与箱号查询</title>
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        input { margin: 10px 0; }
-        .history { margin-top: 20px; }
-        .history-item { margin-bottom: 5px; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        input, button {
+            margin: 10px 0;
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .history {
+            margin-top: 20px;
+        }
+        .history-item {
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .delete-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            color: red;
+        }
+        @media (min-width: 600px) {
+            input, button {
+                width: auto;
+                display: inline-block;
+            }
+            button {
+                margin-left: 10px;
+            }
+        }
+        @media (min-width: 800px) {
+            .history-item {
+                justify-content: flex-start;
+            }
+            .delete-btn {
+                margin-left: auto;
+            }
+        }
     </style>
 </head>
 <body>
@@ -46,6 +90,7 @@
 <h3 id="result"></h3>
 <div class="history">
     <h3>最近查询</h3>
+    <button onclick="deleteAllHistory()">删除所有记录</button>
     <div id="historyList"></div>
 </div>
 
@@ -83,7 +128,7 @@
 
         // 更新查询历史
         if (inputId) {
-            if (history.length === 5) {
+            if (history.length === 10) {
                 history.shift(); // 删除最旧的一条记录
             }
             history.push({ id: inputId, box: result });
@@ -94,12 +139,22 @@
     function updateHistoryList() {
         const historyList = document.getElementById('historyList');
         historyList.innerHTML = '';
-        history.forEach(item => {
+        history.forEach((item, index) => {
             const div = document.createElement('div');
             div.className = 'history-item';
-            div.innerText = `顾客ID: ${item.id}, ${item.box}`;
+            div.innerHTML = `${index + 1}. 顾客ID: ${item.id}, ${item.box} <span class="delete-btn" onclick="deleteHistoryItem(${index})">删除</span>`;
             historyList.appendChild(div);
         });
+    }
+
+    function deleteHistoryItem(index) {
+        history.splice(index, 1);
+        updateHistoryList();
+    }
+
+    function deleteAllHistory() {
+        history = [];
+        updateHistoryList();
     }
 
     // 读取Excel文件
@@ -116,6 +171,4 @@
 </body>
 </html>
 ```
-
-
 
