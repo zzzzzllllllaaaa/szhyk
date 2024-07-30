@@ -2,13 +2,54 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>顾客ID与箱号查询</title>
-    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        input { margin: 10px 0; }
-        .history { margin-top: 20px; }
-        .history-item { margin-bottom: 5px; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        input, button {
+            margin: 10px 0;
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .history {
+            margin-top: 20px;
+        }
+        .history-item {
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .delete-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            color: red;
+        }
+        @media (min-width: 600px) {
+            input, button {
+                width: auto;
+                display: inline-block;
+            }
+            button {
+                margin-left: 10px;
+            }
+        }
+        @media (min-width: 800px) {
+            .history-item {
+                justify-content: flex-start;
+            }
+            .delete-btn {
+                margin-left: auto;
+            }
+        }
     </style>
 </head>
 <body>
@@ -20,6 +61,7 @@
 <h3 id="result"></h3>
 <div class="history">
     <h3>最近查询</h3>
+    <button onclick="deleteAllHistory()">删除所有记录</button>
     <div id="historyList"></div>
 </div>
 
@@ -27,38 +69,45 @@
     let data = {};
     let history = [];
 
-    // 假设'查询表.xlsx'在同一目录下
-    function readExcelFile() {
-        fetch('查询表.xlsx')
-            .then(res => res.arrayBuffer())
-            .then(ab => {
-                const workbook = XLSX.read(ab, { type: 'array' });
-                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                const json = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+    function readJsonFile() {
+        console.log('开始读取JSON文件...');
+        fetch('data.json')
+            .then(res => {
+                console.log('收到响应:', res);
+                if (!res.ok) {
+                    throw new Error('网络响应错误');
+                }
+                return res.json();
+            })
+            .then(json => {
+                console.log('解析的JSON数据:', json);
                 json.forEach(row => {
-                    const customerId = row[0].toString();
-                    const boxNumber = row[1];
+                    const customerId = row.顾客ID ? row.顾客ID.toString() : '';
+                    const boxNumber = row.箱号;
                     if (customerId && boxNumber) {
-                        data[customerId.slice(-4)] = boxNumber;
+                        const lastFourDigits = customerId.slice(-4);
+                        data[lastFourDigits] = boxNumber;
+                        console.log(`添加数据: ${lastFourDigits} -> ${boxNumber}`);
                     }
                 });
+                console.log('数据加载完成:', data);
             })
-            .catch(error => console.error('Error reading the Excel file:', error));
+            .catch(error => console.error('读取JSON文件时出错:', error));
     }
 
     function findBoxNumber() {
-        const inputId = document.getElementById('customerId').value;
+        const inputId = document.getElementById('customerId').value.trim();
+        console.log('输入的顾客ID后四位:', inputId);
         const boxNumber = data[inputId];
         const result = boxNumber ? `箱号: ${boxNumber}` : '未找到对应的箱号';
+        console.log(`查询结果: ${result}`);
         document.getElementById('result').innerText = result;
 
-        // 清空输入框内容
         document.getElementById('customerId').value = '';
 
-        // 更新查询历史
         if (inputId) {
-            if (history.length === 5) {
-                history.shift(); // 删除最旧的一条记录
+            if (history.length === 10) {
+                history.shift();
             }
             history.push({ id: inputId, box: result });
             updateHistoryList();
@@ -68,18 +117,26 @@
     function updateHistoryList() {
         const historyList = document.getElementById('historyList');
         historyList.innerHTML = '';
-        history.forEach(item => {
+        history.forEach((item, index) => {
             const div = document.createElement('div');
             div.className = 'history-item';
-            div.innerText = `顾客ID: ${item.id}, ${item.box}`;
+            div.innerHTML = `${index + 1}. 顾客ID: ${item.id}, ${item.box} <span class="delete-btn" onclick="deleteHistoryItem(${index})">删除</span>`;
             historyList.appendChild(div);
         });
     }
 
-    // 读取Excel文件
-    readExcelFile();
+    function deleteHistoryItem(index) {
+        history.splice(index, 1);
+        updateHistoryList();
+    }
 
-    // 添加回车键查询功能
+    function deleteAllHistory() {
+        history = [];
+        updateHistoryList();
+    }
+
+    readJsonFile();
+
     document.getElementById('customerId').addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             findBoxNumber();
