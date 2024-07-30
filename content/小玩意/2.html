@@ -72,21 +72,28 @@
 
     // 假设'查询表.xlsx'在同一目录下
     function readExcelFile() {
-        fetch('查询表.xlsx')
-            .then(res => res.arrayBuffer())
-            .then(ab => {
-                const workbook = XLSX.read(ab, { type: 'array' });
-                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                const json = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
-                json.forEach(row => {
-                    const customerId = row[0].toString();
-                    const boxNumber = row[1];
-                    if (customerId && boxNumber) {
-                        data[customerId.slice(-4)] = boxNumber;
-                    }
-                });
-            })
-            .catch(error => console.error('Error reading the Excel file:', error));
+        fetch('查询表.xlsx', {
+            mode: 'cors' // 确保请求是跨域请求
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return res.arrayBuffer();
+        })
+        .then(ab => {
+            const workbook = XLSX.read(ab, { type: 'array' });
+            const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+            const json = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+            json.forEach(row => {
+                const customerId = row[0].toString();
+                const boxNumber = row[1];
+                if (customerId && boxNumber) {
+                    data[customerId.slice(-4)] = boxNumber;
+                }
+            });
+        })
+        .catch(error => console.error('Error reading the Excel file:', error));
     }
 
     function findBoxNumber() {
