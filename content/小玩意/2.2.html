@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顾客ID与箱号查询</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        input, button {
+            margin: 10px 0;
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .history {
+            margin-top: 20px;
+        }
+        .history-item {
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .delete-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            color: red;
+        }
+        @media (min-width: 600px) {
+            input, button {
+                width: auto;
+                display: inline-block;
+            }
+            button {
+                margin-left: 10px;
+            }
+        }
+        @media (min-width: 800px) {
+            .history-item {
+                justify-content: flex-start;
+            }
+            .delete-btn {
+                margin-left: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>顾客ID与箱号查询</h1>
+<input type="text" id="customerId" placeholder="输入顾客ID后四位" />
+<button onclick="findBoxNumber()">查询箱号</button>
+<br>
+<h3 id="result"></h3>
+<div class="history">
+    <h3>最近查询</h3>
+    <button onclick="deleteAllHistory()">删除所有记录</button>
+    <div id="historyList"></div>
+</div>
+
+<script>
+    let history = [];
+
+    async function findBoxNumber() {
+        const inputId = document.getElementById('customerId').value.trim();
+        console.log('输入的顾客ID后四位:', inputId);
+
+        // 清空之前的结果
+        document.getElementById('result').innerText = '';
+
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/api/query?customer_id=${inputId}`);
+            if (!response.ok) {
+                throw new Error('网络响应不是ok。状态码：' + response.status);
+            }
+            const data = await response.json();
+            console.log('响应数据:', data);
+            const result = data["箱号"] ? `箱号: ${data["箱号"]}` : '未找到对应的箱号';
+            document.getElementById('result').innerText = result;
+
+            if (inputId) {
+                if (history.length === 10) {
+                    history.shift();
+                }
+                history.push({ id: inputId, box: result });
+                updateHistoryList();
+            }
+
+            document.getElementById('customerId').value = '';
+        } catch (error) {
+            console.error('查询时出错:', error);
+            document.getElementById('result').innerText = '查询时出错，请稍后再试。';
+        }
+    }
+
+    function updateHistoryList() {
+        const historyList = document.getElementById('historyList');
+        historyList.innerHTML = '';
+        history.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'history-item';
+            div.innerHTML = `${index + 1}. 顾客ID: ${item.id}, ${item.box} <span class="delete-btn" onclick="deleteHistoryItem(${index})">删除</span>`;
+            historyList.appendChild(div);
+        });
+    }
+
+    function deleteHistoryItem(index) {
+        history.splice(index, 1);
+        updateHistoryList();
+    }
+
+    function deleteAllHistory() {
+        history = [];
+        updateHistoryList();
+    }
+
+    document.getElementById('customerId').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            findBoxNumber();
+        }
+    });
+</script>
+
+</body>
+</html>
