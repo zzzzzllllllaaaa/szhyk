@@ -66,37 +66,51 @@
 </div>
 
 <script>
+    let data = {};
     let history = [];
 
-    async function findBoxNumber() {
+    function readJsonFile() {
+        console.log('开始读取JSON文件...');
+        fetch('data.json')
+            .then(res => {
+                console.log('收到响应:', res);
+                if (!res.ok) {
+                    throw new Error('网络响应错误');
+                }
+                return res.json();
+            })
+            .then(json => {
+                console.log('解析的JSON数据:', json);
+                json.forEach(row => {
+                    const customerId = row.顾客ID ? row.顾客ID.toString() : '';
+                    const boxNumber = row.箱号;
+                    if (customerId && boxNumber) {
+                        const lastFourDigits = customerId.slice(-4);
+                        data[lastFourDigits] = boxNumber;
+                        console.log(`添加数据: ${lastFourDigits} -> ${boxNumber}`);
+                    }
+                });
+                console.log('数据加载完成:', data);
+            })
+            .catch(error => console.error('读取JSON文件时出错:', error));
+    }
+
+    function findBoxNumber() {
         const inputId = document.getElementById('customerId').value.trim();
         console.log('输入的顾客ID后四位:', inputId);
+        const boxNumber = data[inputId];
+        const result = boxNumber ? `箱号: ${boxNumber}` : '未找到对应的箱号';
+        console.log(`查询结果: ${result}`);
+        document.getElementById('result').innerText = result;
 
-        // 清空之前的结果
-        document.getElementById('result').innerText = '';
+        document.getElementById('customerId').value = '';
 
-        try {
-            const response = await fetch(`http://127.0.0.1:5000/api/query?customer_id=${inputId}`);
-            if (!response.ok) {
-                throw new Error('网络响应不是ok。状态码：' + response.status);
+        if (inputId) {
+            if (history.length === 10) {
+                history.shift();
             }
-            const data = await response.json();
-            console.log('响应数据:', data);
-            const result = data["箱号"] ? `箱号: ${data["箱号"]}` : '未找到对应的箱号';
-            document.getElementById('result').innerText = result;
-
-            if (inputId) {
-                if (history.length === 10) {
-                    history.shift();
-                }
-                history.push({ id: inputId, box: result });
-                updateHistoryList();
-            }
-
-            document.getElementById('customerId').value = '';
-        } catch (error) {
-            console.error('查询时出错:', error);
-            document.getElementById('result').innerText = '查询时出错，请稍后再试。';
+            history.push({ id: inputId, box: result });
+            updateHistoryList();
         }
     }
 
@@ -120,6 +134,8 @@
         history = [];
         updateHistoryList();
     }
+
+    readJsonFile();
 
     document.getElementById('customerId').addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
