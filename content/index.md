@@ -3,9 +3,11 @@ title: 主页面
 ---
 这是一个基于quartz+github搭建的数字花园！！！访问地址如下：
 
+- [主页面 (zhzhzh.cloudns.ch)](https://a.zhzhzh.cloudns.ch/)
+- [主页面 (zhzhzh.cloudns.ch)](http://d.zhzhzh.cloudns.ch/)，有加速，更新有延迟，没弄ssl，一些时候会被拦。
 -  [主页面 (zhzhzh.con.tc)](https://zhzhzh.con.tc/)
 - [主页面 (dev.tc)](https://zhzhzh.dev.tc/)
-- [主页面 (zhzhzh.cloudns.ch)](http://d.zhzhzh.cloudns.ch/)，有加速，更新有延迟，没弄ssl，一些时候会被拦。
+
 
 [哔哩哔哩 嵌入代码转换器 (zhzhzh.cloudns.ch)](https://a.zhzhzh.cloudns.ch/b%E7%AB%99%E5%B5%8C%E5%85%A5%E4%BB%A3%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%99%A8.html)，这是我发现b站嵌入代码不能直接用搞的，它可以把复制的嵌入代码转换为禁止自动播放、超清播放和自适应页面大小的嵌入代码。
 
