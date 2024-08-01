@@ -3,7 +3,7 @@ title: 主页面
 ---
 这是一个基于quartz+github搭建的数字花园！！！访问地址如下：
 
-- [主页面 (zhzhzh.cloudns.ch)](https://a.zhzhzh.cloudns.ch/)
+- [主页面 (zhzhzh.cloudns.ch)](http://a.zhzhzh.cloudns.ch/)
 - [主页面 (zhzhzh.cloudns.ch)](http://d.zhzhzh.cloudns.ch/)，有加速，更新有延迟，没弄ssl，一些时候会被拦。
 -  [主页面 (zhzhzh.con.tc)](https://zhzhzh.con.tc/)
 
