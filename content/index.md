@@ -4,7 +4,6 @@ title: 主页面
 这是一个基于quartz+github搭建的数字花园！！！访问地址如下：
 
 
-- [主页面 (blogu.tc)](https://zhzhzh.blogu.tc/)
 -  [主页面 (zhzhzh.con.tc)](https://zhzhzh.con.tc/)
 - [主页面 (zhzhzh.cloudns.ch)](https://a.zhzhzh.cloudns.ch/)
 
