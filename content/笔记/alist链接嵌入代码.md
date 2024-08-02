@@ -8,6 +8,8 @@
 
 <img src="http://c.zhzhzh.cloudns.ch/d/123%E4%BA%91%E7%9B%98/%E5%9B%BE%E7%89%87/IMG_20240728_151620.jpg?sign=_673A0kI0m2L7oC-d-_Smt6E4bSvTUg9eDm-eKMAgIY=:0" alt="图片描述" />
 
+
+
 ### 视频
 ```
 <video width="320" height="240" controls>
@@ -23,6 +25,18 @@
  
 </video>
 
+#### 自适应页面大小
+
+```
+<video style="width: 100%; height: auto;" controls>
+  <source src="" type="video/mp4">
+</video>
+
+````
+
+<video style="width: 100%; height: auto;" controls>
+  <source src="http://c.zhzhzh.cloudns.ch/d/123%E4%BA%91%E7%9B%98/%E8%A7%86%E9%A2%91/VID_20240507_132024.mp4?sign=_HfxrdQrZtHiytPcG6vEw_vM7W_vxUaJ2m6FJfdWiC4=:0" type="video/mp4">
+</video>
 
 ### 音频
 
