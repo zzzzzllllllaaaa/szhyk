@@ -1,10 +1,17 @@
 ---
 title: 主页面
 ---
+
+<audio controls>
+  <source src="https://c.zhzhzh.cloudns.ch/d/123%E4%BA%91%E7%9B%98/%E8%A7%86%E9%A2%91/%E5%B9%95%E5%90%8E%E7%94%9F%E6%B4%BB%20(%E6%99%AE%E9%80%9A%E4%BA%BA%E7%94%9F)-%E6%B5%B7%E6%B4%8Bbro%26%E9%87%8C%E6%98%82Leo.mp3?sign=WoAHNzmgecGtSkIdGnlJpzSauj2ZWsRzFDDtbK1kdpA=:0" type="audio/mpeg">
+</audio>
+
+
 这是一个基于quartz+github搭建的数字花园！！！访问地址如下：
 
 
 -  [主页面 (zhzhzh.con.tc)](https://zhzhzh.con.tc/)
+- [主页面 (3d.tc)](https://zhzhzh.3d.tc/)
 - [主页面 (zhzhzh.cloudns.ch)](https://a.zhzhzh.cloudns.ch/)
 
 [哔哩哔哩 嵌入代码转换器 (zhzhzh.cloudns.ch)](https://a.zhzhzh.cloudns.ch/b%E7%AB%99%E5%B5%8C%E5%85%A5%E4%BB%A3%E7%A0%81%E8%BD%AC%E6%8D%A2%E5%99%A8.html)，这是我发现b站嵌入代码不能直接用搞的，它可以把复制的嵌入代码转换为禁止自动播放、超清播放和自适应页面大小的嵌入代码。

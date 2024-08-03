@@ -8,8 +8,6 @@
 
 <img src="http://c.zhzhzh.cloudns.ch/d/123%E4%BA%91%E7%9B%98/%E5%9B%BE%E7%89%87/IMG_20240728_151620.jpg?sign=_673A0kI0m2L7oC-d-_Smt6E4bSvTUg9eDm-eKMAgIY=:0" alt="图片描述" />
 
-
-
 ### 视频
 ```
 <video width="320" height="240" controls>
