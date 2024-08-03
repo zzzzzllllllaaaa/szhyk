@@ -15,4 +15,6 @@ title: 主页面
 所以正确观看这个网站的方式不是看目录，而是看文章顶上和旁边的联结笔记，顶上的是父笔记，侧边的是子笔记，可以向上看也可以向下看，越上内容越大，越下内容越细。跟着父子链接跳来跳去，才是数字花园的正确打开方式。
 
 
-<img src="https://c.zhzhzh.cloudns.ch/d/123%E4%BA%91%E7%9B%98/%E5%9B%BE%E7%89%87/workspace_generation_653850728649181540_6f2984844077b729e9565f58d7a4bf9e.png?sign=SL8SEpPRz4ZjggbGMvajir06QsiW86_3R-bkzqEnG3s=:0" alt="图片描述" />
+<video style="width: 100%; height: auto;" controls>
+  <source src="https://c.zhzhzh.cloudns.ch/d/%E4%B8%80%E5%88%BB%E7%9B%B8%E5%86%8C/db7af1e5473245aa6634b0de91ab2fbf.mp4?sign=NWSCdALD4wWNr5XZ2kLdeVJAqtEE07HpMJmqyzPaboc=:0" type="video/mp4">
+</video>
