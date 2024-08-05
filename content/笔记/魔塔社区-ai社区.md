@@ -1,4 +1,4 @@
-[[ai]]，[[有意思]]
+[[ai]]，[[趣站]]
 
 [概览 · 魔搭社区 (modelscope.cn)](https://modelscope.cn/my/overview)
 
