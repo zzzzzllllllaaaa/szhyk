@@ -70,7 +70,6 @@
     let data = {};
     let history = [];
 
-    // 假设'查询表.xlsx'在同一目录下
     function readExcelFile() {
         fetch('查询表.xlsx')
             .then(res => res.arrayBuffer())
@@ -100,10 +99,7 @@
 
         // 更新查询历史
         if (inputId) {
-            if (history.length === 10) {
-                history.shift(); // 删除最旧的一条记录
-            }
-            history.push({ id: inputId, box: result });
+            history.push({ id: inputId, box: result }); // 不再限制历史记录数量
             updateHistoryList();
         }
     }
@@ -129,7 +125,7 @@
         updateHistoryList();
     }
 
-    // 读取Excel文件
+    // 读取 Excel 文件
     readExcelFile();
 
     // 添加回车键查询功能
