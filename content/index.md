@@ -18,10 +18,8 @@ title: 主页面
 
 ### 花园结构
 
-<div style=" width: 100%; height:100;overflow: hidden; "><iframe src="https://widget.pkmer.cn/free/SimpleCountdown?user=7272d49c-137d-4b8b-8e77-1b25f6473ee4&theme-color=%237d7d7d&input-text=%E4%BB%8A%E5%B9%B4%E7%BB%93%E6%9D%9F&date-picker=1735660740000" allow="fullscreen" style=" height: 100%; width: 100%;"></iframe></div>
-
-
 我个人写obsidian是不喜欢打标签，我习惯的记录方式是归档的向上形式，而不是树状图向下分叉写。所以内部双链就是我内容的标签，也是我觉得写下的内容可能需要靠挂记忆的点，所以我的内容都是倒三角，是自下而上的。最顶上的严格来说不是子链是父链。
 
 所以正确观看这个网站的方式不是看目录，而是看文章顶上和旁边的联结笔记，顶上的是父笔记，侧边的是子笔记，可以向上看也可以向下看，越上内容越大，越下内容越细。跟着父子链接跳来跳去，才是数字花园的正确打开方式。
 
+<video controls style="max-width: 100%; height: auto;"><source src="https://c.zhzhzh.cloudns.ch/d/%E4%B8%80%E5%88%BB%E7%9B%B8%E5%86%8C/db7af1e5473245aa6634b0de91ab2fbf.mp4?sign=NWSCdALD4wWNr5XZ2kLdeVJAqtEE07HpMJmqyzPaboc=:0" type="video/mp4">您的浏览器不支持视频标签。</video>
