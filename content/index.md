@@ -7,7 +7,7 @@ title: 主页面
 
 
 
-这是一个基于quartz+github搭建的数字花园！！！访问地址如下：
+这是一个基于quartz+github搭建的数字花园！！访问地址如下：
 
 
 -  [主页面 (zhzhzh.con.tc)](https://zhzhzh.con.tc/)

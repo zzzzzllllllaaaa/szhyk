@@ -1,7 +1,7 @@
 [[index|主页面]]
 
 自定义域名需要修改quartz.config.ts里面的baseUrl
-页脚在：quartz\quartz.layout.ts里面
+页脚在：quartz\quartz.layout.ts里面。
 ```
 npx quartz sync
 ````
