@@ -1,6 +1,7 @@
 ---
 title: 主页面
 ---
+[[数字花园]]
 
 
 <div style=" width: 100%; height:180;overflow: hidden; "><iframe src="https://widget.pkmer.cn/free/RandomMusic?user=7272d49c-137d-4b8b-8e77-1b25f6473ee4&theme-color=%23888888FF&layout-style=Default" allow="fullscreen" style=" height: 100%; width: 100%;"></iframe></div>
