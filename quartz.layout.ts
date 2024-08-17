@@ -7,7 +7,7 @@ export const sharedPageComponents: SharedLayout = {
   header: [],
   footer: Component.Footer({
     links: {
-      "zhzhzh": "https://zhzhzh.netlify.app/"
+      "赣ICP备2024041153号": "https://beian.miit.gov.cn/"
     },
   }),
 }
