@@ -1,5 +1,6 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
+import Sidebar from "./quartz/components/Sidebar" // 导入侧边栏组件
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -11,8 +12,6 @@ export const sharedPageComponents: SharedLayout = {
     },
   }),
 }
-
-
 
 // components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
@@ -34,6 +33,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],
+  afterBody: [Sidebar()] // 添加侧边栏到布局中
 }
 
 // components for pages that display lists of pages  (e.g. tags or folders)
@@ -47,4 +47,5 @@ export const defaultListPageLayout: PageLayout = {
     Component.DesktopOnly(Component.Explorer()),
   ],
   right: [],
+  afterBody: [Sidebar()] // 添加侧边栏到布局中
 }
