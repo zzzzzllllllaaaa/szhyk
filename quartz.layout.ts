@@ -1,6 +1,6 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
-import Sidebar from "./quartz/components/Sidebar" // 导入侧边栏组件
+import SidebarTrigger from "./quartz/components/SidebarTrigger" // 导入导航按钮组件
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -11,7 +11,7 @@ export const sharedPageComponents: SharedLayout = {
       "赣ICP备2024041153号": "https://beian.miit.gov.cn/"
     },
   }),
-  body: [Sidebar()], // 在sharedPageComponents中添加Sidebar
+  body: [SidebarTrigger()], // 在sharedPageComponents中添加SidebarTrigger
 }
 
 // components for pages that display a single page (e.g. a single note)
