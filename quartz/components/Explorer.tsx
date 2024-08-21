@@ -35,6 +35,7 @@ const defaultOptions = {
   },
   filterFn: (node) => node.name !== "tags",
   order: ["filter", "map", "sort"],
+  title: "文件夹",  // 修改默认标题为“文件夹”
 } satisfies Options
 
 export default ((userOpts?: Partial<Options>) => {
