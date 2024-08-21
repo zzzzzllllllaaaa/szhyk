@@ -11,6 +11,7 @@ export const sharedPageComponents: SharedLayout = {
       "赣ICP备2024041153号": "https://beian.miit.gov.cn/"
     },
   }),
+  body: [Sidebar()], // 在sharedPageComponents中添加Sidebar
 }
 
 // components for pages that display a single page (e.g. a single note)
@@ -33,7 +34,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],
-  afterBody: [Sidebar()] // 添加侧边栏到布局中
+  afterBody: []
 }
 
 // components for pages that display lists of pages  (e.g. tags or folders)
@@ -47,5 +48,5 @@ export const defaultListPageLayout: PageLayout = {
     Component.DesktopOnly(Component.Explorer()),
   ],
   right: [],
-  afterBody: [Sidebar()] // 添加侧边栏到布局中
+  afterBody: []
 }
